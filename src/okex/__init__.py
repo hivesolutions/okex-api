@@ -34,14 +34,8 @@ __copyright__ = "Copyright (c) 2008-2017 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-from . import account
 from . import base
-from . import order
 from . import ticker
-from . import trade
 
-from .account import AccountAPI
 from .base import API
-from .order import OrderAPI
 from .ticker import TickerAPI
-from .trade import TradeAPI

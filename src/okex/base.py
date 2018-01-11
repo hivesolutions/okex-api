@@ -43,10 +43,7 @@ import hashlib
 
 import appier
 
-from . import order
-from . import trade
 from . import ticker
-from . import account
 
 BASE_URL = "https://www.okex.com/api/v1/"
 """ The default base URL to be used when no other
@@ -54,10 +51,7 @@ base URL value is provided to the constructor """
 
 class API(
     appier.API,
-    order.OrderAPI,
-    trade.TradeAPI,
-    ticker.TickerAPI,
-    account.AccountAPI
+    ticker.TickerAPI
 ):
 
     def __init__(self, *args, **kwargs):
