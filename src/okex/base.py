@@ -37,10 +37,6 @@ __copyright__ = "Copyright (c) 2008-2017 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-import hmac
-import time
-import hashlib
-
 import appier
 
 from . import ticker
@@ -76,22 +72,4 @@ class API(
         kwargs = None
     ):
         auth = kwargs.pop("auth", True)
-        sign = kwargs.pop("sign", False)
-        if auth and self.api_key: headers["X-MBX-APIKEY"] = self.api_key
-        if sign:
-            params["timestamp"] = int(time.time() * 1000)
-            values = appier.http._urlencode(params)
-            secret = appier.legacy.bytes(self.secret, force = True)
-            values = appier.legacy.bytes(values, force = True)
-            digest = hmac.new(secret, values, hashlib.sha256)
-            params["signature"] = digest.hexdigest()
-
-    def ping(self):
-        url = self.base_url + "ping"
-        contents = self.get(url, auth = False)
-        return contents
-
-    def time(self):
-        url = self.base_url + "time"
-        contents = self.get(url, auth = False)
-        return contents
+        if auth and self.api_key: kwargs["api_key"] = self.api_key
