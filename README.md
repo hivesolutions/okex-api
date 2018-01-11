@@ -1,2 +1,3 @@
-# okex_api
-Simple OKEX exchange Python API client
+# OKEX API
+
+Simple OKEX exchange Python API client.
