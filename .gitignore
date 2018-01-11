@@ -1,0 +1,9 @@
+*.pyc
+
+session.shelve*
+
+.DS_Store
+
+/dist
+/build
+/src/okex_api.egg-info
