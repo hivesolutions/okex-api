@@ -48,7 +48,7 @@ from . import trade
 from . import ticker
 from . import account
 
-BASE_URL = "https://www.okex.com/api/v1"
+BASE_URL = "https://www.okex.com/api/v1/"
 """ The default base URL to be used when no other
 base URL value is provided to the constructor """
 

@@ -39,7 +39,7 @@ __license__ = "Apache License, Version 2.0"
 
 class TickerAPI(object):
 
-    def all_ticker(self):
-        url = self.base_url + "ticker"
-        contents = self.get(url, auth = False)
+    def symbol_ticker(self, symbol):
+        url = self.base_url + "ticker.do"
+        contents = self.get(url, symbol = symbol, auth = False)
         return contents

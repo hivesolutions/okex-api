@@ -56,8 +56,9 @@ class OKEXApp(appier.WebApp):
 
     @appier.route("/ticker", "GET")
     def ticker(self):
+        symbol = self.field("symbol", "eth_btc")
         api = self.get_api()
-        ticker = api.all_ticker()
+        ticker = api.symbol_ticker(symbol)
         return ticker
 
     def get_api(self):
