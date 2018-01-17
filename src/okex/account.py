@@ -56,13 +56,13 @@ class AccountAPI(object):
         target = "address"
     ):
         appier.verify(
-            symbol in ("btc", "eth", "ltc"),
+            symbol in ("btc_usd", "eth_usd", "ltc_usd"),
             message = "Symbol '%s' not supported for withdraw" % symbol
         )
 
-        if symbol == "btc": fee = fee or "0.002"
-        if symbol == "btc": fee = fee or "0.001"
-        if symbol == "eth": fee = fee or "0.001"
+        if symbol.startswith("btc"): fee = fee or "0.002"
+        if symbol.startswith("ltc"): fee = fee or "0.001"
+        if symbol.startswith("eth"): fee = fee or "0.01"
 
         url = self.base_url + "withdraw.do"
         contents = self.post(
