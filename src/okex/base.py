@@ -37,6 +37,8 @@ __copyright__ = "Copyright (c) 2008-2018 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
+import hashlib
+
 import appier
 
 from . import ticker
@@ -74,4 +76,13 @@ class API(
         kwargs = None
     ):
         auth = kwargs.pop("auth", True)
-        if auth and self.api_key: kwargs["api_key"] = self.api_key
+        sign = kwargs.pop("sign", False)
+        if auth and self.api_key: params["api_key"] = self.api_key
+        if sign and self.secret:
+            query_l = list(appier.legacy.items(params))
+            query_l.sort()
+            query_l.append(("secret_key", self.secret))
+            values = appier.http._urlencode(query_l)
+            values = appier.legacy.bytes(values, force = True)
+            digest = hashlib.md5(values)
+            params["sign"] = digest.hexdigest().upper()

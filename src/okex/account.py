@@ -41,6 +41,11 @@ import appier
 
 class AccountAPI(object):
 
+    def self_account(self):
+        url = self.base_url + "userinfo.do"
+        contents = self.post(url, sign = True)
+        return contents
+
     def withdraw_account(
         self,
         symbol,
