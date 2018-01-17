@@ -39,39 +39,34 @@ __license__ = "Apache License, Version 2.0"
 
 import appier
 
-from . import ticker
-from . import account
+class AccountAPI(object):
 
-BASE_URL = "https://www.okex.com/api/v1/"
-""" The default base URL to be used when no other
-base URL value is provided to the constructor """
-
-class API(
-    appier.API,
-    ticker.TickerAPI,
-    account.AccountAPI
-):
-
-    def __init__(self, *args, **kwargs):
-        appier.API.__init__(self, *args, **kwargs)
-        self.base_url = appier.conf("OKEX_BASE_URL", BASE_URL)
-        self.api_key = appier.conf("OKEX_API_KEY", None)
-        self.secret = appier.conf("OKEX_SECRET", None)
-        self.base_url = kwargs.get("base_url", self.base_url)
-        self.api_key = kwargs.get("api_key", self.api_key)
-        self.secret = kwargs.get("secret", self.secret)
-
-    def build(
+    def withdraw_account(
         self,
-        method,
-        url,
-        data = None,
-        data_j = None,
-        data_m = None,
-        headers = None,
-        params = None,
-        mime = None,
-        kwargs = None
+        symbol,
+        address,
+        amount,
+        trade_pwd,
+        fee = None,
+        target = "address"
     ):
-        auth = kwargs.pop("auth", True)
-        if auth and self.api_key: kwargs["api_key"] = self.api_key
+        appier.verify(
+            symbol in ("btc", "eth", "ltc"),
+            message = "Symbol '%s' not supported for withdraw" % symbol
+        )
+
+        if symbol == "btc": fee = fee or "0.002"
+        if symbol == "btc": fee = fee or "0.001"
+        if symbol == "eth": fee = fee or "0.001"
+
+        url = self.base_url + "withdraw.do"
+        contents = self.post(
+            url,
+            symbol = symbol,
+            chargefee = fee,
+            trade_pwd = trade_pwd,
+            withdraw_address = address,
+            withdraw_amount = amount,
+            sign = True
+        )
+        return contents
