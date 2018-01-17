@@ -61,6 +61,12 @@ class OKEXApp(appier.WebApp):
         ticker = api.symbol_ticker(symbol)
         return ticker
 
+    @appier.route("/me", "GET")
+    def me(self):
+        api = self.get_api()
+        account = api.self_account()
+        return account
+
     def get_api(self):
         api = base.get_api()
         return api
