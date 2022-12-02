@@ -6,4 +6,4 @@ session.shelve*
 
 /dist
 /build
-/src/okex_api.egg-info
+/src/okex-api.egg-info

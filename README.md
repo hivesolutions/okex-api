@@ -16,7 +16,7 @@ OKEX API is currently licensed under the [Apache License, Version 2.0](http://ww
 
 ## Build Automation
 
-[![Build Status](https://app.travis-ci.com/hivesolutions/okex_api.svg?branch=master)](https://travis-ci.com/github/hivesolutions/okex_api)
-[![Coverage Status](https://coveralls.io/repos/hivesolutions/okex_api/badge.svg?branch=master)](https://coveralls.io/r/hivesolutions/okex_api?branch=master)
-[![PyPi Status](https://img.shields.io/pypi/v/okex_api.svg)](https://pypi.python.org/pypi/okex_api)
+[![Build Status](https://app.travis-ci.com/hivesolutions/okex-api.svg?branch=master)](https://travis-ci.com/github/hivesolutions/okex-api)
+[![Coverage Status](https://coveralls.io/repos/hivesolutions/okex-api/badge.svg?branch=master)](https://coveralls.io/r/hivesolutions/okex-api?branch=master)
+[![PyPi Status](https://img.shields.io/pypi/v/okex-api.svg)](https://pypi.python.org/pypi/okex-api)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/)
