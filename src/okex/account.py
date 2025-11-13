@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive OKEX API
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive OKEX API.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -39,39 +30,37 @@ __license__ = "Apache License, Version 2.0"
 
 import appier
 
+
 class AccountAPI(object):
 
     def self_account(self):
         url = self.base_url + "userinfo.do"
-        contents = self.post(url, sign = True)
+        contents = self.post(url, sign=True)
         return contents
 
     def withdraw_account(
-        self,
-        symbol,
-        address,
-        amount,
-        trade_pwd,
-        fee = None,
-        target = "address"
+        self, symbol, address, amount, trade_pwd, fee=None, target="address"
     ):
         appier.verify(
             symbol in ("btc_usd", "eth_usd", "ltc_usd"),
-            message = "Symbol '%s' not supported for withdraw" % symbol
+            message="Symbol '%s' not supported for withdraw" % symbol,
         )
 
-        if symbol.startswith("btc"): fee = fee or "0.002"
-        if symbol.startswith("ltc"): fee = fee or "0.001"
-        if symbol.startswith("eth"): fee = fee or "0.01"
+        if symbol.startswith("btc"):
+            fee = fee or "0.002"
+        if symbol.startswith("ltc"):
+            fee = fee or "0.001"
+        if symbol.startswith("eth"):
+            fee = fee or "0.01"
 
         url = self.base_url + "withdraw.do"
         contents = self.post(
             url,
-            symbol = symbol,
-            chargefee = fee,
-            trade_pwd = trade_pwd,
-            withdraw_address = address,
-            withdraw_amount = amount,
-            sign = True
+            symbol=symbol,
+            chargefee=fee,
+            trade_pwd=trade_pwd,
+            withdraw_address=address,
+            withdraw_amount=amount,
+            sign=True,
         )
         return contents

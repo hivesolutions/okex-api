@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive OKEX API
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive OKEX API.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -48,11 +39,8 @@ BASE_URL = "https://www.okex.com/api/v1/"
 """ The default base URL to be used when no other
 base URL value is provided to the constructor """
 
-class API(
-    appier.API,
-    ticker.TickerAPI,
-    account.AccountAPI
-):
+
+class API(appier.API, ticker.TickerAPI, account.AccountAPI):
 
     def __init__(self, *args, **kwargs):
         appier.API.__init__(self, *args, **kwargs)
@@ -67,22 +55,23 @@ class API(
         self,
         method,
         url,
-        data = None,
-        data_j = None,
-        data_m = None,
-        headers = None,
-        params = None,
-        mime = None,
-        kwargs = None
+        data=None,
+        data_j=None,
+        data_m=None,
+        headers=None,
+        params=None,
+        mime=None,
+        kwargs=None,
     ):
         auth = kwargs.pop("auth", True)
         sign = kwargs.pop("sign", False)
-        if auth and self.api_key: params["api_key"] = self.api_key
+        if auth and self.api_key:
+            params["api_key"] = self.api_key
         if sign and self.secret:
             query_l = list(appier.legacy.items(params))
             query_l.sort()
             query_l.append(("secret_key", self.secret))
             values = appier.http._urlencode(query_l)
-            values = appier.legacy.bytes(values, force = True)
+            values = appier.legacy.bytes(values, force=True)
             digest = hashlib.md5(values)
             params["sign"] = digest.hexdigest().upper()

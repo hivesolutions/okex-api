@@ -19,49 +19,8 @@
 # You should have received a copy of the Apache License along with
 # Hive OKEX API. If not, see <http://www.apache.org/licenses/>.
 
-__author__ = "João Magalhães <joamag@hive.pt>"
-""" The author(s) of the module """
-
 __copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
-
-import appier
-
-from . import base
-
-
-class OKEXApp(appier.WebApp):
-
-    def __init__(self, *args, **kwargs):
-        appier.WebApp.__init__(self, name="okex", *args, **kwargs)
-
-    @appier.route("/", "GET")
-    def index(self):
-        return self.ticker()
-
-    @appier.route("/ticker", "GET")
-    def ticker(self):
-        symbol = self.field("symbol", "eth_btc")
-        api = self.get_api()
-        ticker = api.symbol_ticker(symbol)
-        return ticker
-
-    @appier.route("/me", "GET")
-    def me(self):
-        api = self.get_api()
-        account = api.self_account()
-        return account
-
-    def get_api(self):
-        api = base.get_api()
-        return api
-
-
-if __name__ == "__main__":
-    app = OKEXApp()
-    app.serve()
-else:
-    __path__ = []

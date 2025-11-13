@@ -28,40 +28,10 @@ __copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-import appier
-
-from . import base
+import unittest
 
 
-class OKEXApp(appier.WebApp):
+class BaseTest(unittest.TestCase):
 
-    def __init__(self, *args, **kwargs):
-        appier.WebApp.__init__(self, name="okex", *args, **kwargs)
-
-    @appier.route("/", "GET")
-    def index(self):
-        return self.ticker()
-
-    @appier.route("/ticker", "GET")
-    def ticker(self):
-        symbol = self.field("symbol", "eth_btc")
-        api = self.get_api()
-        ticker = api.symbol_ticker(symbol)
-        return ticker
-
-    @appier.route("/me", "GET")
-    def me(self):
-        api = self.get_api()
-        account = api.self_account()
-        return account
-
-    def get_api(self):
-        api = base.get_api()
-        return api
-
-
-if __name__ == "__main__":
-    app = OKEXApp()
-    app.serve()
-else:
-    __path__ = []
+    def test_basic(self):
+        self.assertEqual(1 + 1, 2)
