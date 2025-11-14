@@ -42,6 +42,7 @@ setuptools.setup(
     url="http://okex-api.hive.pt",
     zip_safe=False,
     packages=["okex"],
+    test_suite="okex.test",
     package_dir={"": os.path.normpath("src")},
     install_requires=["appier"],
     classifiers=[
